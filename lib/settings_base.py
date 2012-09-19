@@ -388,7 +388,6 @@ INSTALLED_APPS = (
     'djcelery',
     'django_extensions',
     'django_nose',
-    'raven.contrib.django',
     'gunicorn',
     'piston',
     'waffle',
@@ -1140,7 +1139,11 @@ LOGGING = {
 
 METLOG_CONF = {
     'logger': 'zamboni',
-    'plugins': {'cef': ('metlog_cef.cef_plugin:config_plugin', {})},
+    'plugins': {
+        'cef': ('metlog_cef.cef_plugin:config_plugin', {}),
+        'raven': ('metlog_raven.raven_plugin:config_plugin',
+                        {'sentry_project_id': 2}),
+        },
     'sender': {
         'class': 'metlog.senders.logging.StdLibLoggingSender',
         'logger_name': 'z.metlog',
