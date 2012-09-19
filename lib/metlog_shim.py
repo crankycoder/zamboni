@@ -16,13 +16,6 @@ from __future__ import absolute_import
 
 from metlog.client import SEVERITY
 import logging
-import traceback
-import sys
-
-try:
-    import simplejson as json
-except:
-    import json
 
 
 class MetlogTastypieHandler(logging.Handler):
@@ -32,7 +25,6 @@ class MetlogTastypieHandler(logging.Handler):
     to the standard python logging library.
 
     It is only intended for use with django-tastypie
-    and 
     """
     def __init__(self, metlog_client):
         logging.Handler.__init__(self)
@@ -64,6 +56,7 @@ class MetlogTastypieHandler(logging.Handler):
             logger=record.name,
             severity=severity,
             args=args, kwargs=safe_dict)
+
 
 def hook_logger(logger_name, client):
     """
